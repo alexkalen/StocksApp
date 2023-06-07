@@ -8,6 +8,7 @@ import {
   Text,
   ScrollView,
   RefreshControl,
+  ActivityIndicator,
 } from "react-native";
 
 import Stock from "./Stock";
@@ -28,7 +29,9 @@ function WatchList() {
       </View>
       <View style={styles.stockList}>
         {isLoading ? (
-          <Text>Loading...</Text>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="white" />
+          </View>
         ) : data ? (
           <ScrollView
             refreshControl={
@@ -54,7 +57,9 @@ function WatchList() {
               <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
             }
           >
-            <Text>A problem occured</Text>
+            <View style={styles.loadingContainer}>
+              <Text tyle={styles.errorMessage}>Please try again later...</Text>
+            </View>
           </ScrollView>
         )}
       </View>
@@ -72,15 +77,21 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 2,
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "center",
   },
   stockList: {
-    justifyContent: "center",
     flex: 4,
   },
   watchListTitle: {
     fontSize: 26,
     color: "white",
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  errorMessage: {
+    color: "white",
+    fontSize: 40,
   },
 });
