@@ -25,9 +25,6 @@ function WatchList() {
     <View style={styles.container}>
       <View style={styles.watchListHeader}>
         <Text style={styles.watchListTitle}>Watchlist</Text>
-        <View>
-          <Text style={styles.watchListAll}>All</Text>
-        </View>
       </View>
       <View style={styles.stockList}>
         {isLoading ? (
@@ -85,9 +82,5 @@ const styles = StyleSheet.create({
   watchListTitle: {
     fontSize: 26,
     color: "white",
-  },
-  watchListAll: {
-    color: "#5e5b5b",
-    fontSize: 18,
   },
 });
