@@ -17,6 +17,7 @@ function WatchList() {
   const { isLoading, data, refetch } = useQuery("watchlist", getStocks);
   const [refreshing, setRefreshing] = useState(false);
 
+  //Pull Down to Refresh function (can only used every minute or so becasue of API restrictions)
   const onRefresh = useCallback(() => {
     setRefreshing(true);
     refetch().then(() => setRefreshing(false));
