@@ -11,6 +11,7 @@ function Summary() {
   const [totalStock, setTotalStock] = useState({});
   const { isLoading, data } = useQuery("watchlist", getStocks);
 
+  //Prevents setting 'setTotalStock' unless data has changed.
   useEffect(() => {
     let setter = { open: 0, close: 0 };
     if (data && !isLoading) {

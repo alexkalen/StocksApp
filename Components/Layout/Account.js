@@ -8,6 +8,8 @@ import DepositButton from "../UI/DepositButton";
 function Account() {
   const [account, setAccount] = useState(840.5);
 
+  //Just adding minimal functionality to the Deposit button
+  //by adding 1 to your current Buying Power.
   const depositHandler = () => {
     setAccount((prev) => prev + 1);
   };
