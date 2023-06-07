@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -12,8 +10,6 @@ import Menu from "./Components/Layout/Menu";
 const queryClient = new QueryClient();
 
 export default function App() {
-  const [beeper, setBeeper] = useState({});
-
   return (
     <QueryClientProvider client={queryClient}>
       <StatusBar style="light" />
