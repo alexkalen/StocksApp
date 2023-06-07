@@ -25,7 +25,7 @@ export default function App() {
           <Account />
         </View>
         <View style={styles.watchlistContainer}>
-          <WatchList onWatchListRefresh={WatchListRefreshHandler} />
+          <WatchList />
         </View>
         <View style={styles.spaceContainer}></View>
         <View style={styles.menuContainer}>
