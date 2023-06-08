@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
-import { Feather } from "@expo/vector-icons";
 
-function DepositButton(props) {
+function Button(props) {
   const pressHandler = () => {
     console.log("Caching!");
     props.onDeposit();
@@ -13,16 +12,13 @@ function DepositButton(props) {
         style={({ pressed }) => pressed && styles.pressedItem}
         onPress={pressHandler}
       >
-        <View style={styles.buttonContainer}>
-          <Feather name="plus" size={18} color="white" />
-          <Text style={styles.text}>{props.children}</Text>
-        </View>
+        <View style={styles.buttonContainer}>{props.children}</View>
       </Pressable>
     </View>
   );
 }
 
-export default DepositButton;
+export default Button;
 
 const styles = StyleSheet.create({
   container: {
@@ -35,12 +31,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flexDirection: "row",
-  },
-  text: {
-    color: "#cccccc",
-    fontWeight: "bold",
-    fontSize: 16,
-    marginLeft: 5,
   },
   pressedItem: {
     opacity: 0.7,

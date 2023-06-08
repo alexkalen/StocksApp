@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getCurrentDate } from "./date";
+import { getCurrentDate } from "./getCurrentDate";
 
 DUMMY_STOCKS = [
   {
@@ -27,6 +27,24 @@ DUMMY_STOCKS = [
 const date = getCurrentDate();
 const url = `https://api.polygon.io/v2/aggs/grouped/locale/us/market/stocks/${date}?adjusted=true&apiKey=zum8Kgf5Ce4UV8nFCmanqfkjNk7ZkViD`;
 
+async function getStockImages() {
+  await Promise.all(
+    DUMMY_STOCKS.map((item) => {
+      return axios.get(
+        `https://api.polygon.io/v3/reference/tickers/${item.ticker}?date=${date}&apiKey=zum8Kgf5Ce4UV8nFCmanqfkjNk7ZkViD`
+      );
+    })
+  ).then((values) => {
+    values.map((stockInfo, index) => {
+      if (DUMMY_STOCKS[index].ticker === stockInfo.data.results.ticker) {
+        DUMMY_STOCKS[index].image = stockInfo.data.results.branding.logo_url;
+        DUMMY_STOCKS[index].name = stockInfo.data.results.name;
+      }
+    });
+    return data;
+  });
+}
+
 export async function getStocks() {
   const response = await axios.get(url);
 
@@ -45,13 +63,5 @@ export async function getStocks() {
       image: dummyStock.image,
     });
   });
-
   return pickedStock;
 }
-
-// const getAllStocks = async () => {
-//   const response = await axios.get(url);
-//   return response.data.results;
-// };
-
-// export const UseGetAll
