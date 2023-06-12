@@ -14,10 +14,10 @@ function Performance(props) {
           size={16}
           color="green"
         />
-        <Text style={{ color: "green", paddingRight: 6, fontSize: 15 }}>
+        <Text style={{ color: "green", paddingRight: 6, fontSize: 13 }}>
           {"+$" + stockPerformance.dolarAmount.toFixed(2)}
         </Text>
-        <Text style={{ color: "green", fontSize: 15 }}>
+        <Text style={{ color: "green", fontSize: 13 }}>
           {"(" + stockPerformance.percentageAmount.toFixed(2) + "%)"}
         </Text>
       </View>
@@ -32,10 +32,10 @@ function Performance(props) {
         size={16}
         color="#911616"
       />
-      <Text style={{ color: "#911616", paddingRight: 6, fontSize: 15 }}>
+      <Text style={{ color: "#911616", paddingRight: 6, fontSize: 13 }}>
         {"-$" + Math.abs(stockPerformance.dolarAmount.toFixed(2))}
       </Text>
-      <Text style={{ color: "#911616", fontSize: 15 }}>
+      <Text style={{ color: "#911616", fontSize: 13 }}>
         {"(" + stockPerformance.percentageAmount.toFixed(2) + "%)"}
       </Text>
     </View>

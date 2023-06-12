@@ -1,66 +1,64 @@
-import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { View, Image, Pressable } from "react-native";
+import styled from "styled-components/native";
+import { standardStockName } from "../util/standardStockName";
 
 import Performance from "./Performance";
 
-const images = {
-  AAPL: require("../assets/images/AAPL.png"),
-  ADBE: require("../assets/images/ADBE.png"),
-  LYFT: require("../assets/images/LYFT.png"),
-  SPOT: require("../assets/images/SPOT.png"),
-};
-
-function Stock({ ticker, name, close, open, navigation }) {
+function Stock({ ticker, name, close, open, navigation, icon }) {
   return (
-    <Pressable onPress={() => navigation.navigate("Details")}>
-      <View style={styles.container}>
-        <View style={styles.stockInfo}>
-          <Image style={styles.stockImage} source={images[ticker]} />
+    <Pressable
+      onPress={() => navigation.navigate("Details", { ticker: ticker })}
+    >
+      <Container>
+        <BaseContainer>
+          <Image
+            style={{
+              backgroundColor: "white",
+              marginRight: 15,
+              width: 35,
+              height: 35,
+              borderRadius: 200,
+            }}
+            source={{
+              uri: icon + "?" + "apiKey=zum8Kgf5Ce4UV8nFCmanqfkjNk7ZkViD",
+            }}
+          />
           <View>
-            <Text style={styles.stockCode}>{ticker}</Text>
-            <Text style={styles.stockName}>{name}</Text>
+            <StockText>{ticker}</StockText>
+            <NameText>{standardStockName(name)}</NameText>
           </View>
-        </View>
-        <View style={styles.stockMovement}>
-          <Text style={styles.stockCode}>{"$" + close}</Text>
+        </BaseContainer>
+        <View style={{ alignItems: "flex-end" }}>
+          <StockText>{"$" + close}</StockText>
           <Performance open={+open} close={+close} />
         </View>
-      </View>
+      </Container>
     </Pressable>
   );
 }
 
 export default Stock;
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 10,
-  },
-  stockInfo: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  stockMovement: {
-    justifyContent: "center",
-    alignItems: "flex-end",
-  },
-  stockImage: {
-    backgroundColor: "white",
-    marginRight: 15,
-    width: 35,
-    height: 35,
-    borderRadius: 200,
-  },
-  stockCode: {
-    color: "white",
-    fontSize: 20,
-    paddingBottom: 4,
-  },
-  stockName: {
-    color: "#5e5b5b",
-    fontSize: 16,
-  },
-});
+const Container = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-vertical: 10px;
+`;
+
+const BaseContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StockText = styled.Text`
+  color: white;
+  font-size: 20px;
+  padding-bottom: 2px;
+`;
+
+const NameText = styled.Text`
+  color: #5e5b5b;
+  font-size: 13px;
+`;

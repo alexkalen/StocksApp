@@ -129,7 +129,7 @@ function Home({ navigation }) {
                       open={stock.open}
                       close={stock.close}
                       name={stock.name}
-                      image={stock.image}
+                      icon={stock.icon}
                       navigation={navigation}
                     ></Stock>
                   );
@@ -145,7 +145,7 @@ function Home({ navigation }) {
                 }
               >
                 <View style={styles.loadingContainer}>
-                  <Text tyle={styles.errorMessage}>
+                  <Text style={styles.errorMessage}>
                     Please try again later...
                   </Text>
                 </View>
@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     color: "#5e5b5b",
   },
   summaryTotal: {
-    paddingVertical: 8,
+    paddingTop: 8,
     color: "white",
     fontSize: 40,
     fontWeight: "bold",
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "white",
-    fontSize: 40,
+    fontSize: 14,
   },
   //SPACE
   space: {

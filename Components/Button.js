@@ -1,38 +1,41 @@
-import { StyleSheet, View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
+import styled from "styled-components/native";
 
 function Button(props) {
   const pressHandler = () => {
-    console.log("Caching!");
     props.onDeposit();
   };
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Pressable
-        style={({ pressed }) => pressed && styles.pressedItem}
+        style={({ pressed }) =>
+          pressed && {
+            opacity: 0.7,
+          }
+        }
         onPress={pressHandler}
       >
-        <View style={styles.buttonContainer}>{props.children}</View>
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          {props.children}
+        </View>
       </Pressable>
-    </View>
+    </Container>
   );
 }
 
 export default Button;
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#161616",
-    borderRadius: 28,
-    paddingVertical: 11,
-    paddingHorizontal: 18,
-    elevation: 2,
-    alignItems: "center",
-  },
-  buttonContainer: {
-    flexDirection: "row",
-  },
-  pressedItem: {
-    opacity: 0.7,
-  },
-});
+const Container = styled.View`
+  background-color: #161616;
+  border-radius: 28px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-right: 18px;
+  padding-left: 18px;
+  align-items: center;
+`;
