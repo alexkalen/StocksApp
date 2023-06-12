@@ -11,7 +11,6 @@ const InfoModal = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     triggerModal() {
-      console.log("Jerry");
       setModalVisible(true);
     },
   }));
