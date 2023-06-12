@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo, useEffect } from "react";
+import React, { useState, useCallback, memo, useEffect, useRef } from "react";
 
 import { useQuery } from "react-query";
 import { getStocks } from "../util/https";
@@ -16,17 +16,30 @@ import {
   ScrollView,
   RefreshControl,
   ActivityIndicator,
+  Pressable,
 } from "react-native";
 
-import DepositButton from "./DepositButton";
+import CustomButton from "./CustomButton";
 import Performance from "./Performance";
 import Stock from "./Stock";
+import InfoModal from "./InfoModal";
 
 function Home({ navigation }) {
   const [accountBalance, setAccount] = useState(840.5);
   const [refreshing, setRefreshing] = useState(false);
   const [totalStock, setTotalStock] = useState({});
   const { isLoading, data, refetch } = useQuery("watchlist", getStocks);
+
+  const infoBuyingPowerRef = useRef(null);
+  const infoPerformanceRef = useRef(null);
+
+  const infoBuyingPowerHandler = () => {
+    infoBuyingPowerRef.current.triggerModal();
+  };
+
+  const infoPerformanceHandler = () => {
+    infoPerformanceRef.current.triggerModal();
+  };
 
   //Prevents setting 'setTotalStock' unless data has changed.
   useEffect(() => {
@@ -75,12 +88,14 @@ function Home({ navigation }) {
             <Text style={styles.summaryTotal}>{"$" + totalStock.close}</Text>
             <View style={styles.summaryPerformanceContainer}>
               <Performance open={totalStock.open} close={totalStock.close} />
-              <Octicons
-                name="question"
-                size={13}
-                color="#5e5b5b"
-                style={{ marginLeft: 5 }}
-              />
+              <Pressable onPress={infoPerformanceHandler}>
+                <Octicons
+                  name="question"
+                  size={13}
+                  color="#5e5b5b"
+                  style={{ marginLeft: 5 }}
+                />
+              </Pressable>
             </View>
           </View>
         )}
@@ -90,15 +105,17 @@ function Home({ navigation }) {
           <View>
             <View style={styles.buyingPowerContainer}>
               <Text style={styles.accountTitle}>BUYING POWER</Text>
-              <Octicons name="question" size={13} color="#5e5b5b" />
+              <Pressable onPress={infoBuyingPowerHandler}>
+                <Octicons name="question" size={13} color="#5e5b5b" />
+              </Pressable>
             </View>
             <Text style={styles.accountBalance}>{"$" + accountBalance}</Text>
           </View>
           <View style={styles.depositButton}>
-            <DepositButton onDeposit={depositHandler}>
+            <CustomButton onClick={depositHandler}>
               <Feather name="plus" size={18} color="white" />
               <Text style={styles.buttonText}>Deposit</Text>
-            </DepositButton>
+            </CustomButton>
           </View>
         </View>
       </View>
@@ -154,7 +171,14 @@ function Home({ navigation }) {
           </View>
         </View>
       </View>
-      <View style={styles.space}></View>
+      <View style={styles.space}>
+        <InfoModal ref={infoBuyingPowerRef}>
+          Amount of cash available to aquire different assets.
+        </InfoModal>
+        <InfoModal ref={infoPerformanceRef}>
+          Performance of your overall portfolio.
+        </InfoModal>
+      </View>
       <View style={styles.menu}>
         <View style={styles.menuContainer}>
           <View style={styles.iconContainer}>
