@@ -1,7 +1,7 @@
 import { View, Pressable } from "react-native";
 import styled from "styled-components/native";
 
-function Button(props) {
+function DepositButton(props) {
   const pressHandler = () => {
     props.onDeposit();
   };
@@ -28,7 +28,7 @@ function Button(props) {
   );
 }
 
-export default Button;
+export default DepositButton;
 
 const Container = styled.View`
   background-color: #161616;
