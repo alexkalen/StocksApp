@@ -18,7 +18,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 
-import Button from "./Button";
+import DepositButton from "./DepositButton";
 import Performance from "./Performance";
 import Stock from "./Stock";
 
@@ -95,10 +95,10 @@ function Home({ navigation }) {
             <Text style={styles.accountBalance}>{"$" + accountBalance}</Text>
           </View>
           <View style={styles.depositButton}>
-            <Button onDeposit={depositHandler}>
+            <DepositButton onDeposit={depositHandler}>
               <Feather name="plus" size={18} color="white" />
               <Text style={styles.buttonText}>Deposit</Text>
-            </Button>
+            </DepositButton>
           </View>
         </View>
       </View>
