@@ -4,7 +4,7 @@ React Native app that shows a list of stocks on 'watchlist'. The app makes use o
 
 How to Run:
 
-- Install Expo (if youi dont have it already installed):
+- Install Expo (if you dont have it already installed):
   npm install -g expo-cli
 
 - Install missing npm modules:
